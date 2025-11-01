@@ -672,7 +672,7 @@ Use this hook to fetch details about a deployed smart contract, including the AB
 
 ```ts
 const { data: deployedContractData } = useDeployedContractInfo({
-  contractName: "YourContract",
+  contractName: "CustmERC20Contract",
 });
 ```
 
@@ -697,30 +697,30 @@ Use this hook to get your contract instance by providing the contract name. It e
 For reading data or sending transactions, it's recommended to use `useScaffoldReadContract` and `useScaffoldWriteContract`.
 
 ```ts
-const { data: yourContract } = useScaffoldContract({
-  contractName: "YourContract",
+const { data: CustmERC20Contract } = useScaffoldContract({
+  contractName: "CustmERC20Contract",
 });
 // Returns the greeting and can be called in any function, unlike useScaffoldReadContract
-await yourContract?.call("greeting");
+await CustmERC20Contract?.call("greeting");
 
 // Used to write to a contract and can be called in any function
 import { useAccount } from "@starknet-react/core";
 
 const { account } = useAccount();
-const { data: yourContract } = useScaffoldContract({
-  contractName: "YourContract",
+const { data: CustmERC20Contract } = useScaffoldContract({
+  contractName: "CustmERC20Contract",
 });
 
 const setGreeting = async () => {
-  if (account && yourContract) {
-    yourContract.connect(account);
+  if (account && CustmERC20Contract) {
+    CustmERC20Contract.connect(account);
     // Call the method in any function
-    await yourContract.invoke("set_greeting", ["the greeting here"]);
+    await CustmERC20Contract.invoke("set_greeting", ["the greeting here"]);
   }
 };
 ```
 
-This example uses the `useScaffoldContract` hook to obtain a contract instance for the `YourContract` smart contract.
+This example uses the `useScaffoldContract` hook to obtain a contract instance for the `CustmERC20Contract` smart contract.
 
 #### Configuration
 
@@ -746,7 +746,7 @@ const {
   isLoading: isLoadingEvents,
   error: errorReadingEvents,
 } = useScaffoldEventHistory({
-  contractName: "YourContract",
+  contractName: "CustmERC20Contract",
   eventName: "GreetingChanged",
   fromBlock: 31231n,
   watch: true,
@@ -757,7 +757,7 @@ const {
 });
 ```
 
-This example retrieves the historical event logs for the `GreetingChanged` event of the `YourContract` smart contract, starting from block number 31231 and filtering events where the `greeting_setter` parameter is `0x9eB2C4866aAe575bC88d00DE5061d5063a1bb3aF`.
+This example retrieves the historical event logs for the `GreetingChanged` event of the `CustmERC20Contract` smart contract, starting from block number 31231 and filtering events where the `greeting_setter` parameter is `0x9eB2C4866aAe575bC88d00DE5061d5063a1bb3aF`.
 
 #### Configuration
 
@@ -790,13 +790,13 @@ Use this hook to read public variables and get data from read-only functions of 
 
 ```ts
 const { data: totalCounter } = useScaffoldReadContract({
-  contractName: "YourContract",
+  contractName: "CustmERC20Contract",
   functionName: "user_greeting_counter",
   args: ["0xd8da6bf26964af9d7eed9e03e53415d37aa96045"],
 });
 ```
 
-This example retrieves the data returned by the `user_greeting_counter` function of the `YourContract` smart contract.
+This example retrieves the data returned by the `user_greeting_counter` function of the `CustmERC20Contract` smart contract.
 
 #### Configuration
 
@@ -824,7 +824,7 @@ Use this hook to subscribe to events emitted by your smart contract, and receive
 
 ```ts
 useScaffoldWatchContractEvent({
-  contractName: "YourContract",
+  contractName: "CustmERC20Contract",
   eventName: "GreetingChanged",
   // The onLogs function is called whenever a GreetingChanged event is emitted by the contract.
   // Parameters emitted by the event can be destructed using the below example
@@ -844,7 +844,7 @@ useScaffoldWatchContractEvent({
 });
 ```
 
-This example subscribes to the `GreetingChanged` event emitted by the `YourContract` smart contract and logs the parameters from the event to the console when it's emitted.
+This example subscribes to the `GreetingChanged` event emitted by the `CustmERC20Contract` smart contract and logs the parameters from the event to the console when it's emitted.
 
 This hook is a wrapper around starknet-react's [useWatchContractEvent](https://starknet-react.com/docs/hooks/useWatchContractEvent).
 
@@ -874,8 +874,8 @@ Source: https://www.scaffoldstark.com/docs/hooks/useScaffoldWriteContract
 Use this hook to send a transaction to your smart contract to write data or perform an action.
 
 ```ts
-const { sendAsync: writeYourContractAsync } = useScaffoldWriteContract({
-  contractName: "YourContract",
+const { sendAsync: writeCustmERC20ContractAsync } = useScaffoldWriteContract({
+  contractName: "CustmERC20Contract",
   functionName: "set_greeting",
   args: ["Hello World!"],
 });
@@ -892,14 +892,14 @@ The following configuration options can be passed to the hook:
 | **args** (optional)    | `unknown[]` | Array of arguments to pass to the function (if accepts any). Types are inferred from contract's function parameters.       |
 | **chainId** (optional) | `string`    | Id of the chain the contract lives on. Defaults to [`targetNetworks[0].id`](/deploying/deploy-nextjs-app#--targetnetworks) |
 
-To send the transaction, you can call the `sendAsync` function returned by the hook (which we instance as `writeYourContractAsync`). Here's an example usage:
+To send the transaction, you can call the `sendAsync` function returned by the hook (which we instance as `writeCustmERC20ContractAsync`). Here's an example usage:
 
 ```tsx
 <button
   className="btn btn-primary"
   onClick={async () => {
     try {
-      await writeYourContractAsync();
+      await writeCustmERC20ContractAsync();
     } catch (e) {
       console.error("Error setting greeting:", e);
     }
@@ -909,12 +909,12 @@ To send the transaction, you can call the `sendAsync` function returned by the h
 </button>
 ```
 
-This example sends a transaction to the `YourContract` smart contract to call the `set_greeting` function with the arguments passed to the hook. The `sendAsync` function (`writeYourContractAsync` instance) sends the transaction to the smart contract.
+This example sends a transaction to the `CustmERC20Contract` smart contract to call the `set_greeting` function with the arguments passed to the hook. The `sendAsync` function (`writeCustmERC20ContractAsync` instance) sends the transaction to the smart contract.
 
 You can also override arguments when calling:
 
 ```tsx
-await writeYourContractAsync({ args: ["New Greeting!"] });
+await writeCustmERC20ContractAsync({ args: ["New Greeting!"] });
 ```
 
 #### Return Values
@@ -1266,7 +1266,7 @@ export const GreetingsCount = () => {
 
   const { data: totalCounter, isLoading: isTotalCounterLoading } =
     useScaffoldReadContract({
-      contractName: "YourContract",
+      contractName: "CustmERC20Contract",
       functionName: "total_counter",
     });
 
@@ -1274,7 +1274,7 @@ export const GreetingsCount = () => {
     data: connectedAddressCounter,
     isLoading: isConnectedAddressCounterLoading,
   } = useScaffoldReadContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "user_greeting_counter",
     args: [connectedAddress], // passing args to function
   });
@@ -1336,7 +1336,7 @@ import { useScaffoldReadContract } from "~~/hooks/scaffold-stark";
 export const GreetingsCount = () => {
   // highlight-start
   const { data: totalCounter } = useScaffoldReadContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "total_counter",
   });
   // highlight-end
@@ -1373,13 +1373,13 @@ export const GreetingsCount = () => {
   //highlight-end
 
   const { data: totalCounter } = useScaffoldReadContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "total_counter",
   });
 
   //highlight-start
   const { data: connectedAddressCounter } = useScaffoldReadContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "user_greeting_counter",
     args: [connectedAddress], // passing args to function
   });
@@ -1413,7 +1413,7 @@ export const GreetingsCount = () => {
   const { data: totalCounter, isLoading: isTotalCounterLoading } =
     useScaffoldReadContract({
       // highlight-end
-      contractName: "YourContract",
+      contractName: "CustmERC20Contract",
       functionName: "total_counter",
     });
 
@@ -1423,7 +1423,7 @@ export const GreetingsCount = () => {
     isLoading: isConnectedAddressCounterLoading,
   } = useScaffoldReadContract({
     // highlight-end
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "user_greeting_counter",
     args: [connectedAddress], // passing args to function
   });
@@ -1693,7 +1693,7 @@ export const Greetings = () => {
   const [newGreeting, setNewGreeting] = useState("");
 
   const { sendAsync, isPending } = useScaffoldWriteContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "set_greeting",
     args: [newGreeting],
   });
@@ -1770,7 +1770,7 @@ export const Greetings = () => {
 
   // highlight-start
   const { sendAsync } = useScaffoldWriteContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "set_greeting",
     args: [newGreeting],
   });
@@ -1811,7 +1811,7 @@ export const Greetings = () => {
   const [newGreeting, setNewGreeting] = useState("");
 
   const { sendAsync } = useScaffoldWriteContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "set_greeting",
     args: [newGreeting],
   });
@@ -1859,7 +1859,7 @@ export const Greetings = () => {
   const [newGreeting, setNewGreeting] = useState("");
   // highlight-start
   const { sendAsync, isPending } = useScaffoldWriteContract({
-    contractName: "YourContract",
+    contractName: "CustmERC20Contract",
     functionName: "set_greeting",
     args: [newGreeting],
   });

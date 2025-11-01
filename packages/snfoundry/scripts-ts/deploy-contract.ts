@@ -275,8 +275,8 @@ const findContractFile = (
  * @example
  * ///Example usage of deployContract function
  * await deployContract({
- *   contract: "YourContract",
- *   contractName: "YourContractExportName",
+ *   contract: "CustmERC20Contract",
+ *   contractName: "CustmERC20ContractExportName",
  *   constructorArgs: { owner: deployer.address },
  *   options: { maxFee: BigInt(1000000000000) }
  * });

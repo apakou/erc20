@@ -16,8 +16,8 @@ import { green } from "./helpers/colorize-log";
  * const deployScript = async (): Promise<void> => {
  *   await deployContract(
  *     {
- *       contract: "YourContract",
- *       contractName: "YourContractExportName",
+ *       contract: "CustmERC20Contract",
+ *       contractName: "CustmERC20ContractExportName",
  *       constructorArgs: {
  *         owner: deployer.address,
  *       },
@@ -32,8 +32,8 @@ import { green } from "./helpers/colorize-log";
  * const deployScript = async (): Promise<void> => {
  *   await deployContract(
  *     {
- *       contract: "YourContract",
- *       contractName: "YourContractExportName",
+ *       contract: "CustmERC20Contract",
+ *       contractName: "CustmERC20ContractExportName",
  *       options: {
  *         maxFee: BigInt(1000000000000)
  *       }
@@ -46,9 +46,11 @@ import { green } from "./helpers/colorize-log";
  */
 const deployScript = async (): Promise<void> => {
   await deployContract({
-    contract: "YourContract",
+    contract: "CustmERC20Contract",
     constructorArgs: {
-      owner: deployer.address,
+      name: "Custom ERC20",
+      symbol: "CTK",
+      decimals: 8
     },
   });
 };
