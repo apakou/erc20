@@ -7,7 +7,7 @@ const deployedContracts = {
   devnet: {
     CustmERC20Contract: {
       address:
-        "0x3f0e65496e4f8c2f357c31c8e81eed5294e7be802e8cfd9267d21777335f738",
+        "0x455dbdb8e1caedace243f0c1b73abf62ae75c5438c26c0e708e3368c9350aa9",
       abi: [
         {
           type: "impl",
