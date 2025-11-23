@@ -42,7 +42,7 @@ pub mod CustmERC20Contract {
 
     #[event]
     #[derive(Drop, starknet::Event)]
-    enum Event {
+    pub enum Event {
         Transfer: Transfer,
         Approval: Approval,
         Burned: Burned,
@@ -73,10 +73,10 @@ pub mod CustmERC20Contract {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct Minted {
+    pub struct Minted {
         #[key]
-        to: ContractAddress,
-        amount: u256
+        pub to: ContractAddress,
+        pub amount: u256
     }
 
     #[constructor]
@@ -98,7 +98,7 @@ pub mod CustmERC20Contract {
         }
 
         fn balance_of(self: @ContractState, account: ContractAddress) -> u256 {
-            assert!(!account.is_zero(), "Provided addres should not be zero address.");
+            assert!(!account.is_zero(), "Provided address should not be zero address.");
             self.balances.read(account)
         }
 
